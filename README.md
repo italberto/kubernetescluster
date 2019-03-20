@@ -75,3 +75,50 @@ Adicionar a linha a seguir após o último item Environment e antes do .rimeiro 
 > Environment=”cgroup-driver=systemd/cgroup-driver=cgroupfs”
 
 > \# nano /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+
+
+# Configurações no Master (Kmaster)
+
+## Iniciando o cluster
+
+> \# kubeadm init --apiserver-advertise-address=192.168.0.2 --pod-network-cidr=192.168.0.0/16
+
+O comando irá sugerir dois passos que devem ser seguidos para completar a configuração do cluster. 
+Copie e salve a linha que apresenta os tokens para que um nó ingresse, futuramente, no cluster.
+
+> kubeadm join 192.168.0.2:6443 --token: xxx --discovery-token-ca-cert-hash xxx
+
+> $ mkdir -p $HOME/.kube
+> $ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+> $ sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Para verificar se o kubernetes está rodando, execute:
+
+> $ kubectl get pods -o wide --all-namespaces
+
+Se tudo estiver certo até aqui, apenas um pod estará no estado Pending, o de DNS (kube-dns). Para fazê-lo funcionar, execute a seguinte linha:
+
+> $ kubectl create -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+
+## Iniciando o dashboard
+
+> $ kubectl proxy &
+
+Execute os seguintes comandos para criar uma conta para o dashboard no namespace default e adicionar as regras para a conta dashboard.
+
+$ kubectl create serviceaccount dashboard -n default.
+
+> $ kubectl create clusterrolebinding dashboard-admin -n default \
+>
+>  --clusterrole=cluster-admin \
+>
+>  --serviceaccount=default:dashboard
+
+> $ kubectl get secret $(kubectl get serviceaccount dashboard -o jsonpath="{.secrets[0].name}") -o jsonpath="{.data.token}" | base64 --decode
+
+Guarde co código gerado em um arquivo e em seguida abra  no browser o endereço: http://localhost:8001.
+Na tela que aparecer, escolha a opção de autenticação por Token. E copie no campo o token gerado no passo anterior.
+
+
+# Configurações no(s) Nó(s) (Knode)
+
