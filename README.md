@@ -109,7 +109,7 @@ OU
 
 	$ curl https://docs.projectcalico.org/v3.6/getting-started/kubernetes/installation/hosted/kubernetes-datastore/calico-networking/1.7/calico.yaml -O
 
-	kubectl apply -f calico.yml
+	kubectl apply -f calico.yaml
 
 Agora é só instalar o dashboard.
 
@@ -131,7 +131,7 @@ E execute também:
 
 	$ kubectl get secret $(kubectl get serviceaccount dashboard -o jsonpath="{.secrets[0].name}") -o jsonpath="{.data.token}" | base64 --decode
 
-Guarde co código gerado em um arquivo e em seguida abra  no browser o endereço: http://localhost:8001.
+Guarde co código gerado em um arquivo e em seguida abra  no browser o endereço: http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/.
 Na tela que aparecer, escolha a opção de autenticação por Token. E copie no campo o token gerado no passo anterior.
 
 
