@@ -7,6 +7,10 @@ Os comandos que devem ser executados com privilégios elevados são precedidos p
 
 > \# swapoff -a
 
+> \# sed -i '/swap/s/^/#/g' /etc/fstab
+
+OU
+
 > \# nano /etc/fstab
 
 Comentar com # a linha tipo Swap
@@ -33,24 +37,34 @@ Master, Nó 01 e Nó 02
 
 ## Configurar IP estático nas máquinas.
 
-Nesse caso utilizamos a interface **enp0s8**.
+Nesse caso utilizamos a interface **enp0s8**. Usamos o comando printf em vez do echo para poder inserir quebra de linhas (\n).
+
+
 
 ### No Master
 
-> echo 'auto enp0s8\n iface enp0s8 inet static\n address 192.168.0.2' >> /etc/network/interfaces
+> printf '\nauto enp0s8\niface enp0s8 inet static\naddress 192.168.0.2\n' >> /etc/network/interfaces
 
 ### No Nó 01
 
-> echo 'auto enp0s8\n iface enp0s8 inet static\n address 192.168.0.3' >> /etc/network/interfaces
+> printf '\nauto enp0s8\niface enp0s8 inet static\naddress 192.168.0.3\n' >> /etc/network/interfaces
 
 ### No Nó 02
 
-> echo 'auto enp0s8\n iface enp0s8 inet static\n address 192.168.0.4' >> /etc/network/interfaces
+> printf '\nauto enp0s8\niface enp0s8 inet static\naddress 192.168.0.4\n' >> /etc/network/interfaces
 
 
 Ao final reiniciar a(s) máquina(s).
 
 ## Instalar as dependências
+
+> \# apt-get install -y openssh-server docker.io kubelet kubeadm kubectl
+
+> \# curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+
+> \# cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
+
+> \# apt-get update
 
 > \# apt-get install -y openssh-server docker.io kubelet kubeadm kubectl 
 
