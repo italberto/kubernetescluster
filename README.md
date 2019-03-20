@@ -137,3 +137,20 @@ Na tela que aparecer, escolha a opção de autenticação por Token. E copie no 
 
 # Configurações no(s) Nó(s) (Knode)
 
+Para que o nó ingresse no cluster, basta usar o comando: 
+
+	$ sudo kubeadm join --token <token> 192.168.0.2:6443
+
+Subtitua o **<token>** pelo valor gerado no momento da inicialização do seu 
+
+_________
+
+![Italberto F. Dantas](https://pt.gravatar.com/userimage/663177/7e9f09a165b52db19298539daacd08c5.png) 
+
+Italberto Figueira Dantas
+
+italberto@gmail.com
+
+
+
+
