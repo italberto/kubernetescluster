@@ -107,7 +107,7 @@ Se tudo estiver certo até aqui, apenas um (ou dois) pod estará no estado Pendi
 
 Agora é só instalar o dashboard.
 
-	$ kubectl create -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+	$ kubectl create -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/recommended/kubernetes-dashboard.yaml
 
 ## Iniciando o dashboard
 
@@ -120,6 +120,8 @@ $ kubectl create serviceaccount dashboard -n default.
 	$ kubectl create clusterrolebinding dashboard-admin -n default \
 	--clusterrole=cluster-admin \
 	--serviceaccount=default:dashboard
+
+E execute também:
 
 	$ kubectl get secret $(kubectl get serviceaccount dashboard -o jsonpath="{.secrets[0].name}") -o jsonpath="{.data.token}" | base64 --decode
 
