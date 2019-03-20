@@ -101,7 +101,11 @@ Para verificar se o kubernetes está rodando, execute:
 
 	$ kubectl get pods -o wide --all-namespaces
 
-Se tudo estiver certo até aqui, apenas um pod estará no estado Pending, o de DNS (kube-dns). Para fazê-lo funcionar, execute a seguinte linha:
+Se tudo estiver certo até aqui, apenas um (ou dois) pod estará no estado Pending, o de DNS (coredns). Para fazê-lo funcionar, execute a seguinte linha:
+
+	$ kubectl apply -f https://docs.projectcalico.org/v3.0/getting-started/kubernetes/installation/hosted/kubeadm/1.7/calico.yaml 
+
+Agora é só instalar o dashboard.
 
 	$ kubectl create -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
 
