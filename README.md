@@ -46,15 +46,15 @@ Nesse caso utilizamos a interface **enp0s8**. Usamos o comando printf em vez do 
 
 ### No Master
 
-	printf '\nauto enp0s8\niface enp0s8 inet static\naddress 192.168.0.2\nnetmask 255.255.255\n' >> /etc/network/interfaces
+	printf '\nauto enp0s8\niface enp0s8 inet static\naddress 192.168.0.2\nnetmask 255.255.0.0\n' >> /etc/network/interfaces
 
 ### No Nó 01
 
-	printf '\nauto enp0s8\niface enp0s8 inet static\naddress 192.168.0.3\nnetmask 255.255.255\n' >> /etc/network/interfaces
+	printf '\nauto enp0s8\niface enp0s8 inet static\naddress 192.168.0.3\nnetmask 255.255.0.0\n' >> /etc/network/interfaces
 
 ### No Nó 02
 
-	printf '\nauto enp0s8\niface enp0s8 inet static\naddress 192.168.0.4\nnetmask 255.255.255\n' >> /etc/network/interfaces
+	printf '\nauto enp0s8\niface enp0s8 inet static\naddress 192.168.0.4\nnetmask 255.255.0.0\n' >> /etc/network/interfaces
 
 
 Ao final reiniciar a(s) máquina(s).
