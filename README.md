@@ -58,7 +58,7 @@ Ao final reiniciar a(s) máquina(s).
 
 ## Instalar as dependências
 
-> \# apt-get install -y openssh-server docker.io kubelet kubeadm kubectl
+> \# apt-get update && apt-get install -y apt-transport-https curl
 
 > \# curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 
