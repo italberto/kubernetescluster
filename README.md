@@ -75,6 +75,10 @@ Ao final reiniciar a(s) máquina(s).
 
 Adicionar a linha a seguir após o último item Environment e antes do primeiro ExecStart.
 
+	# sed 's/.*ExecStart=.*/Environment="cgroup-driver=systemd/cgroup-driver=cgroupfs"\n&/' file
+
+OU
+
 	Environment="cgroup-driver=systemd/cgroup-driver=cgroupfs"
 
 	# nano /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
@@ -139,9 +143,9 @@ Na tela que aparecer, escolha a opção de autenticação por Token. E copie no 
 
 Para que o nó ingresse no cluster, basta usar o comando: 
 
-	$ sudo kubeadm join --token <token> 192.168.0.2:6443
+	$ kubeadm join 192.168.0.2:6443 --token: xxx --discovery-token-ca-cert-hash xxx
 
-Subtitua o **<token>** pelo valor gerado no momento da inicialização do seu 
+Substitua o **<token>** pelo valor gerado no momento da inicialização do seu 
 
 _________
 
