@@ -105,6 +105,12 @@ Se tudo estiver certo até aqui, apenas um (ou dois) pod estará no estado Pendi
 
 	$ kubectl apply -f https://docs.projectcalico.org/v3.0/getting-started/kubernetes/installation/hosted/kubeadm/1.7/calico.yaml 
 
+OU
+
+	$ curl https://docs.projectcalico.org/v3.6/getting-started/kubernetes/installation/hosted/kubernetes-datastore/calico-networking/1.7/calico.yaml -O
+
+	kubectl apply -f calico.yml
+
 Agora é só instalar o dashboard.
 
 	$ kubectl create -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/recommended/kubernetes-dashboard.yaml
@@ -115,7 +121,7 @@ Agora é só instalar o dashboard.
 
 Execute os seguintes comandos para criar uma conta para o dashboard no namespace default e adicionar as regras para a conta dashboard.
 
-$ kubectl create serviceaccount dashboard -n default.
+	$ kubectl create serviceaccount dashboard -n default
 
 	$ kubectl create clusterrolebinding dashboard-admin -n default \
 	--clusterrole=cluster-admin \
