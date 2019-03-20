@@ -8,32 +8,32 @@ Os comandos que devem ser executados com privilégios elevados são precedidos p
 
 ## Desativar o swapping
 
-	\# swapoff -a
+	# swapoff -a
 
-	\# sed -i '/swap/s/^/#/g' /etc/fstab
+	# sed -i '/swap/s/^/#/g' /etc/fstab
 
 OU
 
-	\# nano /etc/fstab
+	# nano /etc/fstab
 
 Comentar com # a linha tipo Swap
 
 ## Atualizar o nome do host
 
-	\# echo 'kmaster' > /etc/hostname
+	# echo 'kmaster' > /etc/hostname
 
-	\# echo 'knode' > /etc/hostname
+	# echo 'knode' > /etc/hostname
 
 
 ## Atualizar os arquivos de host de Master e Nós
 
 Master, Nó 01 e Nó 02
 
-	\# sed -i '1 i192.168.0.2 kmaster' /etc/hosts
+	# sed -i '1 i192.168.0.2 kmaster' /etc/hosts
 
-	\# sed -i '1 i192.168.0.3 knode01' /etc/hosts
+	# sed -i '1 i192.168.0.3 knode01' /etc/hosts
 
-	\# sed -i '1 i192.168.0.4 knode02' /etc/hosts
+	# sed -i '1 i192.168.0.4 knode02' /etc/hosts
 
  O comando **sed -i '1 i'** /arquivo insere uma linha no início de um arquivo, nesse caso o mapeamento do ip e nome de host no arquivo **hosts**.
 
@@ -61,15 +61,15 @@ Ao final reiniciar a(s) máquina(s).
 
 ## Instalar as dependências
 
-	\# apt-get update && apt-get install -y apt-transport-https curl
+	# apt-get update && apt-get install -y apt-transport-https curl
 
-	\# curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+	# curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 
-	\# printf 'deb http://apt.kubernetes.io/ kubernetes-xenial main\n' > /etc/apt/sources.list.d/kubernetes.list
+	# printf 'deb http://apt.kubernetes.io/ kubernetes-xenial main\n' > /etc/apt/sources.list.d/kubernetes.list
 
-	\# apt-get update
+	# apt-get update
 
-	\# apt-get install -y openssh-server docker.io kubelet kubeadm kubectl 
+	# apt-get install -y openssh-server docker.io kubelet kubeadm kubectl 
 
 ## Atualizar o arquivo de configuração do Kubernetes
 
@@ -77,14 +77,14 @@ Adicionar a linha a seguir após o último item Environment e antes do primeiro 
 
 	Environment="cgroup-driver=systemd/cgroup-driver=cgroupfs"
 
-	\# nano /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+	# nano /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
 
 
 # Configurações no Master (Kmaster)
 
 ## Iniciando o cluster
 
-	\# kubeadm init --apiserver-advertise-address=192.168.0.2 --pod-network-cidr=192.168.0.0/16
+	# kubeadm init --apiserver-advertise-address=192.168.0.2 --pod-network-cidr=192.168.0.0/16
 
 Pode levar alguns minutos para tudo ficar pronto.
 
